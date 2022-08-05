@@ -1,0 +1,17 @@
+.login {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  &__form {
+    max-width: 500px;
+    width: 100%;
+    display: inherit;
+    flex-direction: column;
+    justify-content: center;
+
+    input {
+      margin-bottom: 2em;
+    }
+  }
+}

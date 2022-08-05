@@ -1,0 +1,8 @@
+<div class="login">
+  <form [formGroup]="formLogin" class="login__form" (ngSubmit)="submit()">
+    <input type="text" placeholder="Name" formControlName="name" />
+    <input type="text" placeholder="Phone" formControlName="phone" />
+
+    <button type="submit" [disabled]="formLogin.invalid">Sign In</button>
+  </form>
+</div>
