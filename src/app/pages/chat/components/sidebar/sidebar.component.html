@@ -1,5 +1,9 @@
 <ul class="sidebar">
-  <li *ngFor="let user of users; let i = index" class="sidebar__user">
+  <li
+    *ngFor="let user of userService.users$ | async; let i = index"
+    class="sidebar__user"
+    (click)="changeSelectUser(user)"
+  >
     <span> User {{ i + 1 }} </span>
   </li>
 </ul>

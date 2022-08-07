@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
+import { Auth } from '@models/auth.model';
+import { UserService } from '@services/user.service';
+
 @Component({
   standalone: true,
   selector: 'app-sidebar',
@@ -9,10 +12,15 @@ import { Component, OnInit } from '@angular/core';
   imports: [CommonModule],
 })
 export class SidebarComponent implements OnInit {
-  users: any[];
-  constructor() {
-    this.users = [1, 2, 3, 4, 5, 6];
+  constructor(public userService: UserService) {}
+
+  ngOnInit(): void {
+    // setTimeout(() => {
+    //   console.log(this._userService.users);
+    // }, 5000);
   }
 
-  ngOnInit(): void {}
+  changeSelectUser(user: Auth) {
+    this.userService.changeSelectedUser = user;
+  }
 }

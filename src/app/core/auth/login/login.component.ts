@@ -6,8 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { IAuth } from '../../../models/auth.model';
+import { IAuthForm } from '@models/auth.model';
+import { UserService } from '@services/user.service';
 
 @Component({
   standalone: true,
@@ -17,16 +19,34 @@ import { IAuth } from '../../../models/auth.model';
   imports: [ReactiveFormsModule],
 })
 export class LoginComponent {
-  formLogin: FormGroup<IAuth>;
+  formLogin: FormGroup<IAuthForm>;
 
-  constructor(private _fb: FormBuilder) {
-    this.formLogin = this._fb.group<IAuth>({
+  constructor(
+    private _fb: FormBuilder,
+    private _userService: UserService,
+    private _router: Router
+  ) {
+    this.formLogin = this._fb.group<IAuthForm>({
       name: new FormControl(null, Validators.required),
       phone: new FormControl(null, Validators.required),
     });
   }
 
   submit() {
-    console.log(this.formLogin.value);
+    // console.log(this.formLogin.value);
+
+    if (this.formLogin.invalid) return;
+
+    let { name, phone } = this.formLogin.value;
+
+    name = name ?? '';
+    phone = phone ?? '';
+
+    this._userService.addUser({
+      name,
+      phone,
+    });
+
+    this._router.navigate(['/']);
   }
 }
